@@ -1,5 +1,17 @@
-// Use it as the 'x-api-key' header when making any request to the API, or by adding as a query string parameter e.g. 'api_key=live_FAKx2pDLsy0XqcD8zWm5HnJoTahsNP10pQpG021j9LSGUyM89HtdGFRCRrCvh7H1'
-import axios from "axios";
+import { fetchBreeds, fetchCatByBreed } from "./js/cat-api.js";
 
-axios.defaults.headers.common["x-api-key"] =
-  "live_FAKx2pDLsy0XqcD8zWm5HnJoTahsNP10pQpG021j9LSGUyM89HtdGFRCRrCvh7H1";
+const refs = {
+  select: document.querySelector(".breed-select"),
+  loader: document.querySelector(".loader"),
+  error: document.querySelector(".error"),
+};
+
+fetchBreeds(refs.select, refs.loader, refs.error);
+
+refs.select.addEventListener("change", showCatBreed);
+
+function showCatBreed(e) {
+  const breed = e.target.value;
+
+  fetchCatByBreed(breed, refs.loader, refs.error);
+}
