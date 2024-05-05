@@ -2,7 +2,7 @@
   "name": "search-cat",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://andriy-kond.github.io/search-cat",
+  "homepage": "https://Andriy-Kond.github.io/search-cat",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /search-cat/"
@@ -11,6 +11,7 @@
   "author": "Andriy Kondratovich",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.8",
     "modern-normalize": "^1.1.0"
   },
   "devDependencies": {
