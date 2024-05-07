@@ -3,16 +3,17 @@
 // У разі успішного запиту, необхідно наповнити select.breed-select опціями так, щоб value опції містило id породи, а в інтерфейсі користувачеві відображалася назва породи.
 
 import axios from "axios";
+import SlimSelect from "slim-select";
 
 axios.defaults.headers.common["x-api-key"] =
   "live_FAKx2pDLsy0XqcD8zWm5HnJoTahsNP10pQpG021j9LSGUyM89HtdGFRCRrCvh7H1";
 
-export function fetchBreeds(select, loader, refError) {
+export async function fetchBreeds(select, loader, refError) {
   select.classList.add("hidden");
   loader.classList.remove("hidden");
   refError.classList.add("hidden");
 
-  axios
+  await axios
     .get("https://api.thecatapi.com/v1/breeds")
     .then((resp) => {
       resp.data.forEach((breed) => {
@@ -20,12 +21,26 @@ export function fetchBreeds(select, loader, refError) {
         option.value = breed.id;
         option.textContent = breed.name;
         select.appendChild(option);
-
-        select.selectedIndex = -1;
       });
 
+      select.selectedIndex = -1;
       select.classList.remove("hidden");
       loader.classList.add("hidden");
+
+      const selectSlimSelect = new SlimSelect({
+        select: document.querySelector(".breed-select"),
+        events: {
+          beforeChange: (newVal, oldVal) => {
+            // return false; // this will stop the change from happening
+          },
+        },
+        settings: {
+          closeOnSelect: true,
+          placeholderText: "Select breed here",
+        },
+      });
+
+      selectSlimSelect.getData([select]);
     })
     .catch((error) => {
       loader.classList.add("hidden");

@@ -1,17 +1,36 @@
 import { fetchBreeds, fetchCatByBreed } from "./js/cat-api.js";
 
+import SlimSelect from "slim-select";
+import "slim-select/dist/slimselect.css";
+
 const refs = {
-  select: document.querySelector(".breed-select"),
+  selectRef: document.querySelector(".breed-select"),
   loader: document.querySelector(".loader"),
   error: document.querySelector(".error"),
 };
 
-fetchBreeds(refs.select, refs.loader, refs.error);
+fetchBreeds(refs.selectRef, refs.loader, refs.error);
 
-refs.select.addEventListener("change", showCatBreed);
+refs.selectRef.addEventListener("change", showCatBreed);
 
 function showCatBreed(e) {
   const breed = e.target.value;
 
   fetchCatByBreed(breed, refs.loader, refs.error);
 }
+
+// const selectSlimSelect = new SlimSelect({
+//   select: document.querySelector(".breed-select"),
+//   events: {
+//     beforeChange: (newVal, oldVal) => {
+//       console.log(newVal);
+
+//       // return false; // this will stop the change from happening
+//     },
+//   },
+//   settings: {
+//     closeOnSelect: true,
+//   },
+// });
+
+// selectSlimSelect.getData([]);
