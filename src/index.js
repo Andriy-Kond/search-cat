@@ -1,22 +1,28 @@
 import { fetchBreeds, fetchCatByBreed } from "./js/cat-api.js";
-
-import SlimSelect from "slim-select";
 import "slim-select/dist/slimselect.css";
 
 const refs = {
   selectRef: document.querySelector(".breed-select"),
   loader: document.querySelector(".loader"),
-  error: document.querySelector(".error"),
+  // error: document.querySelector(".error"),
 };
 
-fetchBreeds(refs.selectRef, refs.loader, refs.error);
+fetchBreeds(
+  refs.selectRef,
+  refs.loader
+  // refs.error
+);
 
 refs.selectRef.addEventListener("change", showCatBreed);
 
 function showCatBreed(e) {
   const breed = e.target.value;
 
-  fetchCatByBreed(breed, refs.loader, refs.error);
+  fetchCatByBreed(
+    breed,
+    refs.loader
+    // refs.error
+  );
 }
 
 // const selectSlimSelect = new SlimSelect({

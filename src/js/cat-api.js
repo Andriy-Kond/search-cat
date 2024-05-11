@@ -4,17 +4,22 @@
 
 import axios from "axios";
 import SlimSelect from "slim-select";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 
 axios.defaults.headers.common["x-api-key"] =
   "live_FAKx2pDLsy0XqcD8zWm5HnJoTahsNP10pQpG021j9LSGUyM89HtdGFRCRrCvh7H1";
 
-export async function fetchBreeds(select, loader, refError) {
+export async function fetchBreeds(
+  select,
+  loader
+  // refError
+) {
   select.classList.add("hidden");
   loader.classList.remove("hidden");
-  refError.classList.add("hidden");
+  // refError.classList.add("hidden");
 
   await axios
-    .get("https://api.thecatapi.com/v1/breeds")
+    .get("https://api.thecatapi.com/v1/breeds123")
     .then((resp) => {
       resp.data.forEach((breed) => {
         const option = document.createElement("option");
@@ -44,18 +49,24 @@ export async function fetchBreeds(select, loader, refError) {
     })
     .catch((error) => {
       loader.classList.add("hidden");
-      refError.classList.remove("hidden");
+      // refError.classList.remove("hidden");
       console.error("Помилка при отриманні даних:", error);
+      Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
+      Notify.failure(`Помилка при отриманні даних: ${error}`);
     });
 }
 
-export function fetchCatByBreed(breedId, loader, refError) {
+export function fetchCatByBreed(
+  breedId,
+  loader
+  // refError
+) {
   const catInfo = document.querySelector(".cat-info");
   const options = { breed_ids: breedId };
 
   catInfo.classList.add("hidden");
   loader.classList.remove("hidden");
-  refError.classList.add("hidden");
+  // refError.classList.add("hidden");
 
   axios
     .get(`https://api.thecatapi.com/v1/images/search?${options}`)
@@ -72,7 +83,9 @@ export function fetchCatByBreed(breedId, loader, refError) {
     })
     .catch((error) => {
       loader.classList.add("hidden");
-      refError.classList.remove("hidden");
-      console.error("Помилка при отриманні даних:", error);
+      // refError.classList.remove("hidden");
+      // console.error("Помилка при отриманні даних:", error);
+      Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
+      Notify.failure(`Помилка при отриманні даних: ${error}`);
     });
 }
