@@ -19,7 +19,7 @@ export async function fetchBreeds(
   // refError.classList.add("hidden");
 
   await axios
-    .get("https://api.thecatapi.com/v1/breeds123")
+    .get("https://api.thecatapi.com/v1/breeds")
     .then((resp) => {
       resp.data.forEach((breed) => {
         const option = document.createElement("option");
