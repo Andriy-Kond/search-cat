@@ -16,7 +16,7 @@ fetchBreeds(
 refs.selectRef.addEventListener("change", showCatBreed);
 
 function showCatBreed(e) {
-  const breed = e.target.value;
+  const breed = e.target.value; // .trim() прибирає пробіли на початку і в кінці, якщо це буде поле input
 
   fetchCatByBreed(
     breed,
